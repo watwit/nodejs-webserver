@@ -25,8 +25,7 @@ router.get("/product/:id",(req,res)=>{ // product/1
         res.sendFile(path.join(__dirname,'../templates/product3.html'))
     }
     else{
-        res.status(404) //เเจ้ง Status code
-        res.send("404 page not found")
+        res.redirect('/')
     }
 
 })
