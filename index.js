@@ -3,26 +3,29 @@
 // import express
 const express=require('express')
 
-// import module path
-const path=require('path')
+const router=require('./routers/myRouter')
 
 // เรียกใช้งาน express ผ่านตัวแปร app
-const app =express()
+const app=express()
 // app.use((req,res)=>{ // path เริ่มต้น
 //     res.send("Hello express.js")
 // })
 
-//Routing
-app.get("/",(req,res)=>{
-    res.status(200) //เเจ้ง Status code
-    res.type('text/html') //กำหนดรูปเเบบเนื้อหา
-    res.sendFile(path.join(__dirname,'./templates/index.html'))
-})
-app.get("/product",(req,res)=>{
-    res.status(200) //เเจ้ง Status code
-    res.type('text/html') //กำหนดรูปเเบบเนื้อหา
-    res.sendFile(path.join(__dirname,'./templates/product1.html'))
-})
+//use router
+app.use(router)
+
+
+// //Routing
+// app.get("/",(req,res)=>{
+//     res.status(200) //เเจ้ง Status code
+//     res.type('text/html') //กำหนดรูปเเบบเนื้อหา
+//     res.sendFile(path.join(__dirname,'./templates/index.html'))
+// })
+// app.get("/product",(req,res)=>{
+//     res.status(200) //เเจ้ง Status code
+//     res.type('text/html') //กำหนดรูปเเบบเนื้อหา
+//     res.sendFile(path.join(__dirname,'./templates/product1.html'))
+// })
 
 app.listen(8080,()=>{ // run server
 console.log("Start server on port 8080")
