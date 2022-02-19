@@ -7,7 +7,17 @@ const express=require('express')
 const app =express()
 app.use((req,res)=>{ // path เริ่มต้น
     res.send("Hello express.js")
-}).listen(8080,()=>{ // run server
+})
+
+//Routing
+app.get("/home",(req,res)=>{
+    res.send("Hello Home")
+})
+app.get("/product",(req,res)=>{
+    res.send("Hello product")
+})
+
+app.listen(8080,()=>{ // run server
 console.log("Start server on port 8080")
 })
 
