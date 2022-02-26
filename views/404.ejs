@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>KongRuksiam Shop</title>
+        <title>รายละเอียดสินค้า</title>
         <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
         <script src="js/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -24,21 +24,16 @@
             </ul>
         </nav>
         <div class="container">
-            <div class="row my-3">
-                <% Object.values(products).forEach(function(item){ %> 
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="card h-100">
-                            <a href="product.html"><img class="card-img-top" src="<%= item.image  %>" alt="" /></a>
-                            <div class="card-body">
-                                <h4 class="card-title">
-                                    <a href="product.html"><%= item.name  %> </a>
-                                </h4>
-                                <h5>ราคา <%= item.price  %></h5>
-                                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt reprehenderit ea iure, rerum debitis ab voluptate delectus doloribus</p>
-                            </div>
+            <div class="row">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div class="card mt-4">
+                        <img class="card-img-top img-fluid" src="images/404/404.png" alt="" />
+                        <div class="card-body">
+                            <h1 align="center"><b>ขออภัย!</b>ไม่พบข้อมูลสินค้า</h1>
                         </div>
                     </div>
-                <% }) %>
+                </div>
             </div>
         </div>
     </body>

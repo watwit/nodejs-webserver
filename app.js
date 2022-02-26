@@ -2,23 +2,24 @@
 // import express
 const express=require('express')
 
-// เรียกใช้งาน express ผ่านตัวแปร app
-const app=express()
-
 // import module path
 const path=require('path')
 
 // import module rounter
 const router=require('./routers/myRouter')
 
+// เรียกใช้งาน express ผ่านตัวแปร app
+const app=express()
+
 //use EJS Template Engine
 app.use(router)
 app.set('views',path.join(__dirname,'views'))
 app.set('view engine','ejs')
+app.use(express.static(path.join(__dirname,'public')))
 
 app.listen(8080,()=>{ // run server
     console.log("Start server on port 8080")
-}) 
+    }) 
 
 
 
