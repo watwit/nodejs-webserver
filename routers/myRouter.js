@@ -1,12 +1,25 @@
+
+//================= Views =======================
 // import express
 const express=require('express')
 
 // import express router
 const router=express.Router()
 
-// import module path
-const path=require('path')
+router.get('/',(req,res)=>{
+    res.render('index.ejs')
+})
 
+
+//========================================
+// // import express
+// const express=require('express')
+
+// // import express router
+// const router=express.Router()
+
+// // import module path
+// const path=require('path')
 // // จัดการ Routing + Parameter
 // router.get("/",(req,res)=>{
 //     res.status(200) //เเจ้ง Status code

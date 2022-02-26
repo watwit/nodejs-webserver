@@ -1,13 +1,38 @@
-// ================ Node js + Express ====================
-
+// ================ Node js + Express + Template ====================
 // import express
 const express=require('express')
 
-// //use router
-//const router=require('./routers/myRouter')
-
 // เรียกใช้งาน express ผ่านตัวแปร app
 const app=express()
+
+// import module path
+const path=require('path')
+
+// import module rounter
+const router=require('./routers/myRouter')
+
+//use EJS Template Engine
+app.use(router)
+app.set('views',path.join(__dirname,'views'))
+app.set('view engine','ejs')
+
+app.listen(8080,()=>{ // run server
+    console.log("Start server on port 8080")
+    }) 
+
+
+
+    
+// ================ Node js + Express ====================
+
+// // import express
+// const express=require('express')
+
+// // //use router
+// //const router=require('./routers/myRouter')
+
+// // เรียกใช้งาน express ผ่านตัวแปร app
+// const app=express()
 
 // app.use((req,res)=>{ // path เริ่มต้น
 //     res.send("Hello express.js")
@@ -18,8 +43,8 @@ const app=express()
 
 // //Use Static File
 // import module path
-const path=require('path')
-app.use(express.static(path.join(__dirname,'pubilc')))
+// const path=require('path')
+// app.use(express.static(path.join(__dirname,'pubilc')))
 
 // //Routing
 // app.get("/",(req,res)=>{
@@ -33,9 +58,9 @@ app.use(express.static(path.join(__dirname,'pubilc')))
 //     res.sendFile(path.join(__dirname,'./templates/product1.html'))
 // })
 
-app.listen(8080,()=>{ // run server
-console.log("Start server on port 8080")
-})
+// app.listen(8080,()=>{ // run server
+// console.log("Start server on port 8080")
+// })
 
 
 
