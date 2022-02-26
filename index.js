@@ -3,17 +3,23 @@
 // import express
 const express=require('express')
 
-const router=require('./routers/myRouter')
+// //use router
+//const router=require('./routers/myRouter')
 
 // เรียกใช้งาน express ผ่านตัวแปร app
 const app=express()
+
 // app.use((req,res)=>{ // path เริ่มต้น
 //     res.send("Hello express.js")
 // })
 
-//use router
-app.use(router)
+// //use router
+//app.use(router)
 
+// //Use Static File
+// import module path
+const path=require('path')
+app.use(express.static(path.join(__dirname,'pubilc')))
 
 // //Routing
 // app.get("/",(req,res)=>{
