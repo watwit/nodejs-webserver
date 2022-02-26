@@ -12,6 +12,7 @@ const router=require('./routers/myRouter')
 const app=express()
 
 //use EJS Template Engine
+app.use(express.urlencoded({extended:false})) // use form  post method -> router
 app.use(router)
 app.set('views',path.join(__dirname,'views'))
 app.set('view engine','ejs')

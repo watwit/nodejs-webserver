@@ -14,6 +14,25 @@ router.get('/',(req,res)=>{
     res.render('index.ejs',{products:products})
 })
 
+router.get('/addForm',(req,res)=>{
+    res.render('form')
+})
+
+router.get('/manage',(req,res)=>{
+    res.render('manage')
+})
+
+// router.get('/insert',(req,res)=>{
+//     console.log(req.query)
+//     console.log(req.query.name)
+// })
+
+router.post('/insert',(req,res)=>{
+    console.log(req.body)
+    res.render('form')
+})
+
+
 
 //========================================
 // // import express
