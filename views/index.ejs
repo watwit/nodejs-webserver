@@ -12,9 +12,14 @@
     <br>
     <b><%=age %></b>
     <hr>
-
     <% if(age>=18){ %> 
         <h1>ผ่าน</h1>
+    <% } %> 
+    <hr>
+
+    <% for (let index = 0; index < 10; index++) { %> 
+        <h1> <%= index %> </h1>
+        
     <% } %> 
 </body>
 </html>
