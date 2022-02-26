@@ -18,7 +18,7 @@ app.set('view engine','ejs')
 
 app.listen(8080,()=>{ // run server
     console.log("Start server on port 8080")
-    }) 
+}) 
 
 
 

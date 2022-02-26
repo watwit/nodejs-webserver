@@ -7,7 +7,13 @@ const express=require('express')
 const router=express.Router()
 
 router.get('/',(req,res)=>{
-    res.render('index.ejs')
+    const name="M M"
+    const address="<h3> aaaaaaa </h3>"
+    res.render('index.ejs',{
+        name:name,
+        age:35,
+        address:address
+    })
 })
 
 
