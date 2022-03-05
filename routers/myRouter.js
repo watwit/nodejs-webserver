@@ -6,6 +6,9 @@ const express=require('express')
 // import express router
 const router=express.Router()
 
+// import mongodb models
+const Product=require('../models/product')
+
 router.get('/',(req,res)=>{
     const products=[ 
         {name:"เสื้อ",price:50,image:'images/products/product1.png'},               
@@ -28,8 +31,19 @@ router.get('/manage',(req,res)=>{
 // })
 
 router.post('/insert',(req,res)=>{
-    console.log(req.body)
-    res.render('form')
+    
+    let data = new Product({
+        name:req.body.name,
+        price:req.body.price,
+        image:req.body.image,
+        description:req.body.description
+    })
+
+    Product.saveProduct(data,(err)=>{
+        if(err) console.log(err)
+        res.redirect('/')
+    })
+
 })
 
 
