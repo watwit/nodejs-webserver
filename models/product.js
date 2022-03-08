@@ -20,10 +20,6 @@ const productSchema=mongoose.Schema({
 //สร้าง Model
 let Product=mongoose.model("products",productSchema)
 
-
-
-
-
 //ส่งออก Model
 module.exports=Product
 

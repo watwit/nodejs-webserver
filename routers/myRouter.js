@@ -9,33 +9,82 @@ const router=express.Router()
 // import mongodb models
 const Product=require('../models/product')
 
+// import multer
+const multer=require('multer')
+
 router.get('/',(req,res)=>{
-    const products=[ 
-        {name:"เสื้อ",price:50,image:'images/products/product1.png'},               
-        {name:"กางเกง",price:40,image:'images/products/product2.png'}
-    ]
-    res.render('index.ejs',{products:products})
+    Product.find().exec((err,doc)=>{
+        res.render('index.ejs',{products:doc})
+    }) 
 })
 
 router.get('/addForm',(req,res)=>{
-    res.render('form')
+    // if(req.cookies.login){
+    //     res.render('form')
+    // }else{
+    //     res.render('admin') 
+    // }
+
+    if(req.session.login){
+        res.render('form')
+    }else{
+        res.render('admin') 
+    }
 })
 
 router.get('/manage',(req,res)=>{
-    res.render('manage')
-})
+    // if(req.cookies.login){
+    //     Product.find().exec((err,doc)=>{
+    //         res.render('manage',{products:doc})
+    //     })
+    // }else{
+    //     res.render('admin')
+    // }
 
+    if(req.session.login){
+        Product.find().exec((err,doc)=>{
+            res.render('manage',{products:doc})
+        })
+    }else{
+        res.render('admin')
+    }
+
+})
+router.get('/logout',(req,res)=>{
+    // res.clearCookie('username')
+    // res.clearCookie('password')
+    // res.clearCookie('login')
+    // res.redirect('/manage')
+    req.session.destroy((err)=>{
+        res.redirect('/manage')
+    })
+    
+})
 // router.get('/insert',(req,res)=>{
 //     console.log(req.query)
 //     console.log(req.query.name)
 // })
 
-router.post('/insert',(req,res)=>{
+
+const storage=multer.diskStorage({
+    destination:function(req,file,cb){
+        cb(null,'./public/images/products')
+    },
+    filename:function(req,file,cb){
+        cb(null,Date.now()+".jpg")
+    }
+})
+//เริ่มต้น Upload
+const upload=multer({
+    storage:storage
+})
+
+router.post('/insert',upload.single("image"),(req,res)=>{
     
     let data = new Product({
         name:req.body.name,
         price:req.body.price,
-        image:req.body.image,
+        image:req.file.filename,
         description:req.body.description
     })
 
@@ -45,6 +94,71 @@ router.post('/insert',(req,res)=>{
     })
 
 })
+
+router.get('/delete/:id',(req,res)=>{
+    Product.findByIdAndDelete(req.params.id ,{usefindAndModify:false}).exec(err=>{
+        if(err) console.log(err)
+        res.redirect('/manage')
+    })
+})
+
+router.get('/:id',(req,res)=>{
+    const product_id=req.params.id;
+    Product.findOne({_id:product_id}).exec((err,doc)=>{
+        res.render('product',{products:doc})
+    })
+})
+
+router.post('/edit',(req,res)=>{
+    const edit_id=req.body.edit_id
+
+    Product.findOne({_id:edit_id}).exec((err,doc)=>{
+        res.render('edit',{products:doc})
+    })
+
+})
+
+router.post('/update',(req,res)=>{
+    let id = req.body.update_id
+    let data = {
+        name:req.body.name,
+        price:req.body.price,
+        description:req.body.description
+    }
+
+    Product.findByIdAndUpdate(id,data,{usefindAndModify:false}).exec(err=>{
+        if(err) console.log(err)
+        res.redirect('/manage')
+    })
+
+})
+
+
+router.post('/login',(req,res)=>{
+    const username=req.body.username
+    const password=req.body.password
+    const timeExpire=10000 // 10วิ
+    
+    if(username=='admin' && password=='123'){
+        // //สร้าง Cookie
+        // res.cookie('username',username,{maxAge:timeExpire})
+        // res.cookie('password',password,{maxAge:timeExpire})
+        // res.cookie('login',true,{maxAge:timeExpire})
+        // res.redirect('/manage')
+
+        // สร้าง session
+        req.session.username=username
+        req.session.password=password
+        req.session.login=true
+        req.session.cookie.maxAge=timeExpire
+        res.redirect('/manage')
+    }else{
+        res.render('404')
+    }
+
+})
+
+
 
 
 

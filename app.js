@@ -11,11 +11,22 @@ const router=require('./routers/myRouter')
 // เรียกใช้งาน express ผ่านตัวแปร app
 const app=express()
 
+// เรียกใช้งาน cookie
+const cookieParser=require('cookie-parser')
+
+// import serrion
+const session=require('express-session')
+
 //use EJS Template Engine
-app.use(express.urlencoded({extended:false})) // use form  post method -> router
-app.use(router)
+
 app.set('views',path.join(__dirname,'views'))
 app.set('view engine','ejs')
+
+app.use(express.urlencoded({extended:false})) // use form  post method -> router
+app.use(cookieParser()) // use cookieParser
+app.use(session({secret:"mysession",resave:false,saveUninitialized:false})) // use session
+
+app.use(router)
 app.use(express.static(path.join(__dirname,'public')))
 
 app.listen(8080,()=>{ // run server
